@@ -18,6 +18,10 @@ Download the dataset here https://drive.google.com/file/d/1FmTzKa_DLOmIg6bZqAKGj
 
 # Task
 
+## Trial
+
+Try running train.py on your computer. Don't forget to have a Python interpreter and also Pytorch installed. To start follow this link https://pytorch.org/get-started/locally/
+
 ## Dataloader
 
 Adjust train.py so that you can load the dataset given above.
