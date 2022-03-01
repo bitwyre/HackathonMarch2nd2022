@@ -1,1 +1,3 @@
 data/
+model.pth
+*.pth

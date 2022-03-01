@@ -8,6 +8,16 @@ from torchvision.transforms import ToTensor
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using {device} device")
 
+# Download test data from open datasets.
+test_data = datasets.FashionMNIST(
+    root="data",
+    train=False,
+    download=True,
+    transform=ToTensor(),
+)
+
+batch_size = 64
+
 # Define model
 class NeuralNetwork(nn.Module):
     def __init__(self):
