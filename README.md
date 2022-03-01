@@ -18,7 +18,15 @@ Download the dataset here https://drive.google.com/file/d/1FmTzKa_DLOmIg6bZqAKGj
 
 # Task
 
-Find the best predictive model for prices for any assets given the dataset of past asset trajectory.
+## Dataloader
+
+Adjust train.py so that you can load the dataset given above.
+
+## Best Predictive Model for Prices
+
+After adjusting the train.py dataloader, adjust the NeuralNetwork class so that it can train from the price dataset.
+
+Your task is then to find the best predictive model for prices for any assets given the dataset of past asset trajectory.
 
 For example the input should be an array of N x 1 or N x m assets, where N is the number of steps (rows) of datapoints taken.
 
