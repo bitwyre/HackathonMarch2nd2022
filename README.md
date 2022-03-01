@@ -24,6 +24,10 @@ For example the input should be an array of N x 1 or N x m assets, where N is th
 
 Fetch the array into the model and spit out a number that would be the output of the next day's price. This is called backtesting.
 
+# Tutorial
+
+Follow some tutorials on Pytorch here https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html
+
 # Copyright
 
 2022, Bitwyre Technologies Holdings Incorporated (BTHC) Panama
