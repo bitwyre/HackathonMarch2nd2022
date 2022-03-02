@@ -41,14 +41,22 @@ print(f"Length of training set is {len(train_data)}")
 print(f"Length of label set is {len(label_data)}")
 print(f"Length of test set is {len(test_data)}")
 
-train_data = torch.Tensor(train_data).view(-1)
-label_data = torch.Tensor(label_data).view(-1)
-test_data = torch.Tensor(test_data).view(-1)
+train_data = torch.Tensor(train_data).unsqueeze(-1)
+label_data = torch.Tensor(label_data).unsqueeze(-1)
+train_data = torch.Tensor(train_data).unsqueeze(-1)
+label_data = torch.Tensor(label_data).unsqueeze(-1)
+test_data = torch.Tensor(test_data)
 
 batch_size = 64
 
 trainset = torch.utils.data.TensorDataset(train_data, label_data)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size)
+
+for X, y in trainloader:
+    print(f"Shape of X: {X.shape} {X.dtype}")
+    print(f"Shape of y: {y.shape} {y.dtype}")
+    break
+
 testset = torch.utils.data.TensorDataset(test_data)
 testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size)
 
@@ -72,6 +80,8 @@ def train(dataloader, model, loss_fn, optimizer):
 
         # Compute prediction error
         pred = model(X)
+        print(f"Shape of pred: {pred.shape} {pred.dtype}")
+        print(f"Shape of y: {y.shape} {y.dtype}")
         loss = loss_fn(pred, y)
 
         # Backpropagation
