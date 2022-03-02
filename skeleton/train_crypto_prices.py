@@ -79,9 +79,9 @@ def train(dataloader, model, loss_fn, optimizer):
         X, y = X.to(device), y.to(device)
 
         # Compute prediction error
-        pred = model(X)
-        print(f"Shape of pred: {pred.shape} {pred.dtype}")
-        print(f"Shape of y: {y.shape} {y.dtype}")
+        pred, (_, _) = model(X)
+        # print(f"Shape of pred: {pred.shape} {pred.dtype}")
+        # print(f"Shape of y: {y.shape} {y.dtype}")
         loss = loss_fn(pred, y)
 
         # Backpropagation
@@ -93,10 +93,26 @@ def train(dataloader, model, loss_fn, optimizer):
             loss, current = loss.item(), batch * len(X)
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
+def test(dataloader, model, loss_fn):
+    size = len(dataloader.dataset)
+    num_batches = len(dataloader)
+    model.eval()
+    test_loss, correct = 0, 0
+    with torch.no_grad():
+        for X, y in dataloader:
+            X, y = X.to(device), y.to(device)
+            pred, (_, _) = model(X)
+            test_loss += loss_fn(pred, y).item()
+            correct += (pred.argmax(1) == y).type(torch.float).sum().item()
+    test_loss /= num_batches
+    correct /= size
+    print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
+
 epochs = 10
 for t in range(epochs):
     print(f"Epoch {t+1}\n-------------------------------")
     train(trainloader, model, loss_function, optimizer)
+    # test(testloader, model, loss_function)
     torch.save(model.state_dict(), "model_lstm.pth")
     print("Saved PyTorch Model State to model.pth")
 print("Done!")
